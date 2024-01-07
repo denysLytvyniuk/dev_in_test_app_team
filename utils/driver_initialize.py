@@ -17,10 +17,12 @@ def create_driver_with_retries(max_retries=5, wait_interval=2):
     # Получения первого подключеного устройства
     capabilities = android_get_desired_capabilities()
     udid = get_udid()
-    if udid:
-        capabilities['udid'] = get_udid()
-    else:
+    if not udid:
+        # Возращаему ошибку если нету подключенных udid
         raise Exception("Нету подключенных устройств")
+
+    capabilities['udid'] = get_udid()
+
     # Проверка доступности порта
     for attempt in range(max_retries):
         port = capabilities['systemPort']

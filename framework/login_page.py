@@ -1,4 +1,3 @@
-import time
 
 from utils.android_utils import login_button_XPATH, email_input_id, password_input_id
 
@@ -24,7 +23,8 @@ class LoginPage(Page):
     - press_login_button: Нажимает кнопку входа.
     - find_login_button: Ищет кнопку входа.
     - close: Закрывает драйвер и завершает сессию.
-
+    - login: входит в систему
+    - check_if_logged_in: проверка на наличие кнопки входа
     """
     EMAIL_INPUT = (MobileBy.ID, email_input_id)
     PASSWORD_INPUT = (MobileBy.ID, password_input_id)
@@ -49,6 +49,7 @@ class LoginPage(Page):
         return self.find_element(self.LOGIN_BUTTON)
 
     def login(self, email, password):
+        """Метод входа в систему"""
 
         self.press_login_button()
 
@@ -59,7 +60,9 @@ class LoginPage(Page):
         self.press_login_button()
 
     def check_if_logged_in(self):
-        return self.is_element_displayed(self.LOGIN_BUTTON)
+        """Метод для проверки входа в систему путем поиска кнопки Вхід и возращением противоположного bool значения"""
+
+        return not self.is_element_displayed(self.LOGIN_BUTTON)
 
     def close(self):
         """Метод для завершения драйвера"""

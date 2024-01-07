@@ -34,8 +34,8 @@ def driver(run_appium_server):
     try:
         driver = create_driver_with_retries()
         yield driver
-    except Exception:
-        raise Exception
+    except Exception as e:
+        print(e)
     finally:
         if driver:
             driver.quit()
@@ -43,5 +43,8 @@ def driver(run_appium_server):
 
 @pytest.fixture(scope='session')
 def logging():
+    """
+    Фикстура для логирования во время теста
+    """
     logger = get_logger()
     yield logger

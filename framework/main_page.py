@@ -15,7 +15,7 @@ class MainPage(LoginPage):
 
     def __init__(self, driver):
         """
-        Метод инициализации который запускает приложения и лоигиниться в систему
+        Метод инициализации который запускает приложения и логиниться в систему
         """
         super().__init__(driver)
         super().login(VALID_EMAIL, VALID_PASSWORD)

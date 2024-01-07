@@ -4,7 +4,15 @@ from selenium.common.exceptions import TimeoutException
 
 
 class Page:
-
+    """
+    Базовый клас с иниациализацей appium драйвера
+    Методы класа:
+    - wait_for_element: ожидания элемента
+    - wait_for_element_to_be_clicable: ожидания кликабельности элемента
+    - find_element: для поиска элемента с ожиданием
+    - click_element: для клика по элементу с ожиданием.
+    - is_element_displayed: для проверки есть ли елемент на странице
+    """
     def __init__(self, driver):
         self.driver = driver
 
@@ -18,7 +26,7 @@ class Page:
             raise TimeoutException
 
     def wait_for_element_to_be_clicable(self, locator, timeout=10):
-        """Метод для ожидания элемента."""
+        """Метод для ожидания кликабельности элемента."""
         wait = WebDriverWait(self.driver, timeout)
         try:
             element = wait.until(EC.presence_of_element_located(locator))

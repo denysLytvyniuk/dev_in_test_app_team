@@ -41,8 +41,12 @@ def test_login(logging, user_login_fixture, email, password, expected):
     logging.debug("Проверка осталась ли кнопка входа...")
     # Так как иногда вылезает ошибка связанная со синхронизацией, я добавил дополнительныq клик по кнопке
     if not is_logged_in:
+
         user_login_fixture.press_login_button()
         logging.debug("Повторное нажатие на кнопку входа")
+        time.sleep(3)
+        is_logged_in = user_login_fixture.check_if_logged_in()
+        logging.debug("Повторная проверка осталась ли кнопка входа...")
 
     # Если ожидаемый результат не совпадает с фактическим, вызываем исключение
     if expected != is_logged_in:
